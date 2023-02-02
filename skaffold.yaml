@@ -1,19 +1,23 @@
 apiVersion: skaffold/v4beta2
 kind: Config
+metadata:
+  name: skaffold-create-react-app
 build:
   artifacts:
-  - image: jzenon/auth
-    context: auth
-    sync:
-      manual:
-      - src: src/**/*.js
-        dest: .
-    docker:
-      dockerfile: Dockerfile
-  local:
-    push: false
+    - image: skaffold-create-react-app
+      sync:
+        infer:
+          - "**/*.js"
+          - "**/*.jsx"
+          - "**/*.css"
+      docker:
+        dockerfile: Dockerfile
 manifests:
   rawYaml:
-  - ./infra/k8s/*
+    - k8s/deployment.yaml
 deploy:
   kubectl: {}
+portForward:
+  - resourceType: deployment
+    resourceName: create-react-app
+    port: 3000

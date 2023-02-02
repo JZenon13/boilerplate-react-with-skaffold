@@ -1,7 +1,7 @@
 import "./App.css";
 
 function App() {
-  return <div className="App">Mic Check...one two...</div>;
+  return <div className="App">a</div>;
 }
 
 export default App;
